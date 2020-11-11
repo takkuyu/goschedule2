@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "243266824004",
+    "firebase_url": "https://goschedule-b08d8.firebaseio.com",
+    "project_id": "goschedule-b08d8",
+    "storage_bucket": "goschedule-b08d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243266824004:android:970eaf4bd630de2aabd911",
+        "android_client_info": {
+          "package_name": "com.example.goschedule2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243266824004-actlv0nphj3pdt401n01h3ecqv0baaek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.goschedule2",
+            "certificate_hash": "3a8368a47fd7b7eb89f61df730d7cf1e861e23eb"
+          }
+        },
+        {
+          "client_id": "243266824004-k4obo6ukq2k14clt8q2egi4vnrp52b53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChons6y80xD2ifD4_q6oUnuxowBj9oRVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243266824004-k4obo6ukq2k14clt8q2egi4vnrp52b53.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
