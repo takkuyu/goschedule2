@@ -33,4 +33,10 @@ class OurUser{
     this.sunAvailability,
   });
 
+  OurUser.fromFiresotre(DocumentSnapshot data) {
+    this.uid = data.id;
+    this.fullName = data.get('fullName');
+    this.companyId = data.get('companyId');
+  }
+
 }

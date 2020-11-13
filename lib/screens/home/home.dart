@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/carlo/Desktop/goschedule2/lib/screens/home/widgets/contacts/contacts.dart';
+import 'package:goschedule2/screens/home/widgets/contacts/contacts.dart';
+import 'package:goschedule2/screens/home/widgets/create_shift/create_shift.dart';
 import 'package:goschedule2/screens/home/widgets/dashboard.dart';
 import 'package:goschedule2/screens/home/widgets/profile.dart';
 import 'package:goschedule2/screens/home/widgets/profile/profile_details.dart';
 import 'package:goschedule2/screens/home/widgets/shifts.dart';
+import 'package:goschedule2/states/currentUser.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -21,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final ProfileDetails _profileDetails = ProfileDetails();
   final OurProfile _profile = OurProfile();
   // final OurContacts _contacts = OurContacts();
+  final CreateShift _createShift = CreateShift();
 
   Widget _showPage = new OurShifts();
 
@@ -38,6 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
       case 3:
         return _profileDetails;
         break;
+      case 4:
+        return _createShift;
+        break;
       default:
         return new Container(
           child: new Center(
@@ -53,37 +62,44 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          key: _bottomNavigationKey,
-          index: pageIndex,
-          height: 50.0,
-          items: <Widget>[
-            Icon(Icons.dashboard, size: 30),
-            Icon(Icons.calendar_today, size: 30),
-            Icon(Icons.group, size: 30),
-            Icon(Icons.person, size: 30),
-            //Icon(Icons.perm_identity, size: 30),
-          ],
-          color: Colors.white,
-          buttonBackgroundColor: Colors.white,
-          backgroundColor: Colors.blueAccent,
-          animationCurve: Curves.easeInOut,
-          animationDuration: Duration(milliseconds: 600),
-          onTap: (int tappedIndex) {
-            setState(() {
-              _showPage = _pageChooser(tappedIndex);
-            });
-          },
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-          color: Colors.blueAccent,
-          ),
-          child: Center(
-            child: _showPage,
-          ),
-        ));
+    CurrentUser _currentUser = Provider.of(context, listen: false);
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('companies').snapshots(),
+      builder: (context, snapshot) {
+        if(!snapshot.hasData) return Center(child: CircularProgressIndicator(),);
+        List<String> managers = snapshot.data.documents.map<String>((data) => data.get('generalManager').toString()).toList();
+        return Scaffold(
+            bottomNavigationBar: CurvedNavigationBar(
+              key: _bottomNavigationKey,
+              index: pageIndex,
+              height: 50.0,
+              items: <Widget>[
+                Icon(Icons.dashboard, size: 30),
+                Icon(Icons.calendar_today, size: 30),
+                Icon(Icons.group, size: 30),
+                Icon(Icons.person, size: 30),
+                if(managers.contains(_currentUser.getCurrentUser.uid)) Icon(Icons.add, size: 30),
+              ],
+              color: Colors.white,
+              buttonBackgroundColor: Colors.white,
+              backgroundColor: Colors.blueAccent,
+              animationCurve: Curves.easeInOut,
+              animationDuration: Duration(milliseconds: 600),
+              onTap: (int tappedIndex) {
+                setState(() {
+                  _showPage = _pageChooser(tappedIndex);
+                });
+              },
+            ),
+            body: Container(
+              decoration: BoxDecoration(
+              color: Colors.blueAccent,
+              ),
+              child: Center(
+                child: _showPage,
+              ),
+            ));
+      }
+    );
   }
 }
