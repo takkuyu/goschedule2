@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goschedule2/models/company.dart';
 import 'package:goschedule2/models/user_data.dart';
 
 class OurDatabase{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final CollectionReference _usersCollection = FirebaseFirestore.instance.collection('users');
 
   Future<String> createUser(OurUser user) async {
     String retVal = "error";
@@ -40,7 +42,7 @@ class OurDatabase{
       retVal.email = _docSnapshot.data()['email'];
       retVal.accountCreated = _docSnapshot.data()["accountCreated"];
       retVal.companyId = _docSnapshot.data()["companyId"];
-      retVal.phoneNo = _docSnapshot.data()["companyId"];
+      retVal.phoneNo = _docSnapshot.data()["phoneNo"];
       retVal.monAvailability = _docSnapshot.data()["mondayAvailability"];
       retVal.tueAvailability = _docSnapshot.data()["tuesdayAvailability"];
       retVal.wedAvailability = _docSnapshot.data()["wednesdayAvailability"];
@@ -48,6 +50,23 @@ class OurDatabase{
       retVal.friAvailability = _docSnapshot.data()["fridayAvailability"];
       retVal.satAvailability = _docSnapshot.data()["saturdayAvailability"];
       retVal.sunAvailability = _docSnapshot.data()["sundayAvailability"];
+    }
+    catch(e){
+      print(e);
+    }
+    return retVal;
+  }
+
+  Future<OurCompany> getCompanyInfo(String groupId) async {
+    OurCompany retVal = OurCompany();
+
+    try{
+      DocumentSnapshot _docSnapshot = await _firestore.collection("companies").doc(groupId).get();
+      retVal.id = groupId;
+      retVal.name = _docSnapshot.data()["name"];
+      retVal.generalManager = _docSnapshot.data()['generalManager'];
+      retVal.members = List<String>.from(_docSnapshot.data()["members"]);
+      retVal.companyCreated = _docSnapshot.data()['companyCreated'];
     }
     catch(e){
       print(e);
@@ -134,8 +153,34 @@ class OurDatabase{
     }
     catch(e){
       print(e);
+      print("_"+ companyId + "_");
     }
 
     return retVal;
   }
+
+  ///EDIT FROM HERE
+  //Employee list from snapshot
+  List<OurUser> _userListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc){
+      return OurUser(
+          fullName: doc.data()['name'] ?? 'UNDEFINED',
+          phoneNo: doc.data()['phoneNo'] ?? 'UNDEFINED',
+          email: doc.data()['email'] ?? 'UNDEFINED',
+          monAvailability: doc.data()['mondayAvailability'] ?? 'UNDEFINED',
+          tueAvailability: doc.data()['tuesdayAvailability'] ?? 'UNDEFINED',
+          wedAvailability: doc.data()['wednesdayAvailability'] ?? 'UNDEFINED',
+          thuAvailability: doc.data()['thursdayAvailability'] ?? 'UNDEFINED',
+          friAvailability: doc.data()['fridayAvailability'] ?? 'UNDEFINED',
+          satAvailability: doc.data()['saturdayAvailability'] ?? 'UNDEFINED',
+          sunAvailability: doc.data()['sundayAvailability'] ?? 'UNDEFINED'
+      );
+    }).toList();
+  }
+
+  //Get employee streams
+  Stream<List<OurUser>> get users {
+    return _usersCollection.snapshots().map(_userListFromSnapshot);
+  }
+  ///UNTIL HERE!!
 }

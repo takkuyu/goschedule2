@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:goschedule2/states/currentUser.dart';
-import 'package:provider/provider.dart';
+import 'package:goschedule2/models/user_data.dart';
 
-// ignore: must_be_immutable
-class ProfileDetails extends StatelessWidget {
+class ContactDetails extends StatelessWidget {
+  final OurUser user;
 
+  const ContactDetails({Key key, this.user}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
-
-    CurrentUser _currentUser = Provider.of(context, listen: false);
-
     return Scaffold(
       backgroundColor: Colors.blueAccent,
+      appBar: AppBar(
+        title: Text('Employee Details'),
+        backgroundColor: Colors.white,
+      ),
       body: ListView(
         children: [
           Container(
@@ -23,10 +25,11 @@ class ProfileDetails extends StatelessWidget {
               color: Colors.blue,
               shape: BoxShape.circle,
             ),
-            child: Text(_currentUser.getCurrentUser.fullName[0].toUpperCase(), style: TextStyle(color: Colors.white, fontSize: 20),),
+            child: Text(user.fullName[0].toUpperCase(), style: TextStyle(color: Colors.white, fontSize: 20),),
           ),
-          Container(width: double.infinity, alignment: Alignment.center, child: Text(_currentUser.getCurrentUser.fullName, style: TextStyle(fontWeight: FontWeight.bold),)),
-          Container(width: double.infinity, alignment: Alignment.center, child: Text("POSITION")),
+          Container(width: double.infinity, alignment: Alignment.center, child: Text(user.fullName, style: TextStyle(fontWeight: FontWeight.bold),)),
+          // Container(width: double.infinity, alignment: Alignment.center, child: Text(user.position)),
+          Container(width: double.infinity, alignment: Alignment.center, child: Text("employee.position")),
           Card(
             margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
             child: Padding(
@@ -41,7 +44,8 @@ class ProfileDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Mobile'),
-                          Text(_currentUser.getCurrentUser.phoneNo),
+                          // Text(employee.phoneNo),
+                          Text('employee.phoneNo'),
                         ],
                       )
                     ],
@@ -55,7 +59,8 @@ class ProfileDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Email'),
-                          Text(_currentUser.getCurrentUser.email),
+                          // Text(employee.email),
+                          Text('employee.email'),
                         ],
                       )
                     ],
@@ -67,7 +72,7 @@ class ProfileDetails extends StatelessWidget {
           Card(
             margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
               child: Column(
                 children: [
                   Row(
@@ -81,7 +86,8 @@ class ProfileDetails extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.monAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      // Text(employee.monAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text('employee.monAvailability', style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   ),
                   Divider(),
@@ -96,7 +102,8 @@ class ProfileDetails extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.tueAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      // Text(employee.tueAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text('employee.tueAvailability', style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   ),
                   Divider(),
@@ -111,7 +118,8 @@ class ProfileDetails extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.wedAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      // Text(employee.wedAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text('employee.wedAvailability', style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   ),
                   Divider(),
@@ -126,7 +134,8 @@ class ProfileDetails extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.thuAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      // Text(employee.thuAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text('employee.thuAvailability', style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   ),
                   Divider(),
@@ -141,7 +150,8 @@ class ProfileDetails extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.friAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      // Text(employee.friAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text('employee.friAvailability', style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   ),
                   Divider(),
@@ -156,7 +166,8 @@ class ProfileDetails extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.satAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      // Text(employee.satAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text('employee.satAvailability', style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   ),
                   Divider(),
@@ -171,7 +182,8 @@ class ProfileDetails extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.sunAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      // Text(employee.sunAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text('employee.sunAvailability', style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   ),
                 ],

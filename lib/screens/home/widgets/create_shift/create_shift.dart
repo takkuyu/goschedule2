@@ -56,7 +56,7 @@ class _CreateShiftState extends State<CreateShift> {
 
   Future<List<OurUser>> _getEmployees() async {
     final data = await FirebaseFirestore.instance.collection('users').get();
-    List<OurUser> users = data.docs.map<OurUser>((doc) => OurUser.fromFiresotre(doc)).toList();
+    List<OurUser> users = data.docs.map<OurUser>((doc) => OurUser.fromFirestore(doc)).toList();
     return users;
   }
 

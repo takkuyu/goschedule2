@@ -22,24 +22,24 @@ class _HomeScreenState extends State<HomeScreen> {
   int pageIndex = 0;
 
   final OurShifts _shifts = OurShifts();
-  final OurDashboard _dashboard = OurDashboard();
+  // final OurDashboard _dashboard = OurDashboard();
   final ProfileDetails _profileDetails = ProfileDetails();
   final OurProfile _profile = OurProfile();
-  // final OurContacts _contacts = OurContacts();
+  final OurContacts _contacts = OurContacts();
   final CreateShift _createShift = CreateShift();
 
-  Widget _showPage = new OurShifts();
+  Widget _showPage = new OurDashboard();
 
   Widget _pageChooser(int page){
     switch (page) {
       case 0:
-        return _dashboard;
+        return _profile;
         break;
       case 1:
         return _shifts;
         break;
       case 2:
-        return _profile;
+        return _contacts;
         break;
       case 3:
         return _profileDetails;
