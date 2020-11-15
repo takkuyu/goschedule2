@@ -38,5 +38,4 @@ class OurUser{
     this.fullName = data.get('fullName');
     this.companyId = data.get('companyId');
   }
-
 }

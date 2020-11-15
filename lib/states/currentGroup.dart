@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:goschedule2/models/company.dart';
-import 'package:goschedule2/screens/home/widgets/shifts.dart';
+import 'package:goschedule2/screens/home/widgets/shifts_activity.dart';
 
 class CurrentGroup extends ChangeNotifier{
   OurCompany _currentCompany = OurCompany();

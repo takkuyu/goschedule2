@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goschedule2/screens/home/widgets/contacts/contacts.dart';
 import 'package:goschedule2/screens/home/widgets/create_shift/create_shift.dart';
 import 'package:goschedule2/screens/home/widgets/dashboard.dart';
 import 'package:goschedule2/screens/home/widgets/profile.dart';
 import 'package:goschedule2/screens/home/widgets/profile/profile_details.dart';
-import 'package:goschedule2/screens/home/widgets/shifts.dart';
+import 'package:goschedule2/screens/home/widgets/shifts_activity.dart';
 import 'package:goschedule2/states/currentUser.dart';
 import 'package:provider/provider.dart';
 

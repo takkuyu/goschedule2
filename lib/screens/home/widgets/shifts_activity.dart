@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:goschedule2/models/shifts.dart';
 
 // Example holidays.
 final Map<DateTime, List> _holidays = {
@@ -24,54 +26,67 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
   List _selectedEvents;
   CalendarController _calendarController;
 
+  ///SHIFTS LIST
+  Future<List<Shifts>> _getShifts() async {
+    final data = await FirebaseFirestore.instance.collection('shifts').get();
+    List<Shifts> shifts = data.docs.map<Shifts>((doc) => Shifts.fromFirebase(doc)).toList();
+    return shifts;
+  }
+  ///
+
   @override
   void initState() {
     super.initState();
     final _selectedDay = DateTime.now();
+
+    //List<Shifts> sameCompanyUser = snapshot.data.where((e) => (e.companyId == _currentUser.getCurrentUser.companyId && e.uid != _currentUser.getCurrentUser.uid)).toList();
+
     // @todo: Fetch data from firebase and add them on this variable.
     _events = {
+
+
       _selectedDay.subtract(Duration(days: 27)): [
-        {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'}
+      {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'}
       ],
       _selectedDay.subtract(Duration(days: 2)): [
-        {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'}
+      {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'}
       ],
       _selectedDay.subtract(Duration(days: 16)): [
-        {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'}
+      {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'}
       ],
       _selectedDay.subtract(Duration(days: 10)): [
-        {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'}
+      {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'}
       ],
       _selectedDay.subtract(Duration(days: 4)): [
-        {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'}
+      {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'}
       ],
       // Today
       _selectedDay: [
-        {'title': 'Test Shift 6', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 6', 'startTime': '9:00am', 'endTime': '6:00pm'},
-        {'title': 'Test Shift 6', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 6', 'startTime': '9:00am', 'endTime': '6:00pm'}
+      {'title': _getShifts(), 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 6', 'startTime': '9:00am', 'endTime': '6:00pm'},
+      {'title': 'Test Shift 6', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 6', 'startTime': '9:00am', 'endTime': '6:00pm'}
       ],
       _selectedDay.add(Duration(days: 3)): [
-        {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'}
+      {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'},
+      {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'}
       ],
       _selectedDay.add(Duration(days: 7)): [
         {'title': 'Test Shift 8', 'startTime': '8:00am', 'endTime': '5:00pm'},
@@ -79,7 +94,7 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
         {'title': 'Test Shift 8', 'startTime': '8:00am', 'endTime': '5:00pm'},
         {'title': 'Test Shift 8', 'startTime': '8:00am', 'endTime': '5:00pm'}
       ],
-      // _selectedDay.add(Duration(days: 3)): Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
+       _selectedDay.add(Duration(days: 3)): Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
     };
 
     _selectedEvents = _events[_selectedDay] ?? [];
@@ -157,7 +172,7 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
           borderRadius: BorderRadius.circular(16.0),
         ),
       ),
-      //onDaySelected: _onDaySelected,
+      // onDaySelected: _onDaySelected,
       onVisibleDaysChanged: _onVisibleDaysChanged,
     );
   }
@@ -188,13 +203,5 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
   }
 }
 
-// import 'package:flutter/material.dart';
-//
-// class OurShifts extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//         child: Text("Shifts", textScaleFactor: 2.0,)
-//     );
-//   }
-// }
+
+
