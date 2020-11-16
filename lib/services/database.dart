@@ -15,6 +15,7 @@ class OurDatabase{
         'email' :user.email,
         'accountCreated' : Timestamp.now(),
         'phoneNo' : 'NOT_SET',
+        'position' : 'NOT_SET',
         'mondayAvailability' : 'NOT_SET',
         'tuesdayAvailability' : 'NOT_SET',
         'wednesdayAvailability' : 'NOT_SET',
@@ -39,8 +40,8 @@ class OurDatabase{
       DocumentSnapshot _docSnapshot = await _firestore.collection("users").doc(uid).get();
       retVal.uid = uid;
       retVal.fullName = _docSnapshot.data()["fullName"];
+      retVal.position = _docSnapshot.data()["position"];
       retVal.email = _docSnapshot.data()['email'];
-      retVal.accountCreated = _docSnapshot.data()["accountCreated"];
       retVal.companyId = _docSnapshot.data()["companyId"];
       retVal.phoneNo = _docSnapshot.data()["phoneNo"];
       retVal.monAvailability = _docSnapshot.data()["mondayAvailability"];
@@ -98,27 +99,16 @@ class OurDatabase{
     return retVal;
   }
 
-  //Update User phone number
-  Future updateUserPhoneNo(String uid, String phoneNo) async {
-    String retVal = "error";
-    try{
-      await _firestore.collection("users").doc(uid).set({
-        'phoneNo' : phoneNo,
-      });
-      retVal = 'success!';
-    }
-    catch(e){
-      print(e);
-    }
-
-    return retVal;
-  }
-
   //Update User availability
-  Future updateUserAvailability(String uid, String monAvailability, String tueAvailability, String wedAvailability, String thuAvailability, String friAvailability, String satAvailability, String sunAvailability,) async {
+  Future updateUserInformation(String uid, String name, String email, String phoneNo, String position, String companyId, String monAvailability, String tueAvailability, String wedAvailability, String thuAvailability, String friAvailability, String satAvailability, String sunAvailability,) async {
     String retVal = "error";
     try{
       await _firestore.collection("users").doc(uid).set({
+        'fullName' : name,
+        'phoneNo' : phoneNo,
+        'position' : position,
+        'companyId' : companyId,
+        'email' : email,
         'mondayAvailability' : monAvailability,
         'tuesdayAvailability' : tueAvailability,
         'wednesdayAvailability' : wedAvailability,
@@ -167,6 +157,7 @@ class OurDatabase{
           fullName: doc.data()['name'] ?? 'UNDEFINED',
           phoneNo: doc.data()['phoneNo'] ?? 'UNDEFINED',
           email: doc.data()['email'] ?? 'UNDEFINED',
+          position: doc.data()['position'] ?? 'UNDEFINED',
           monAvailability: doc.data()['mondayAvailability'] ?? 'UNDEFINED',
           tueAvailability: doc.data()['tuesdayAvailability'] ?? 'UNDEFINED',
           wedAvailability: doc.data()['wednesdayAvailability'] ?? 'UNDEFINED',

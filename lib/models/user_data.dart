@@ -4,7 +4,6 @@ class OurUser{
   String uid;
   String email;
   String fullName;
-  Timestamp accountCreated;
   String companyId;
   String position;
   String phoneNo;
@@ -20,7 +19,6 @@ class OurUser{
     this.uid,
     this.email,
     this.fullName,
-    this.accountCreated,
     this.companyId,
     this.position,
     this.phoneNo,

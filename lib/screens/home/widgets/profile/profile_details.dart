@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:goschedule2/screens/home/widgets/profile/editProfile.dart';
 import 'package:goschedule2/states/currentUser.dart';
 import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
 class ProfileDetails extends StatelessWidget {
 
   @override
@@ -12,6 +12,16 @@ class ProfileDetails extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.blueAccent,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EditProfile()),
+          );
+        },
+        child: Icon(Icons.edit),
+        backgroundColor: Colors.blue,
+      ),
       body: ListView(
         children: [
           Container(
@@ -26,7 +36,7 @@ class ProfileDetails extends StatelessWidget {
             child: Text(_currentUser.getCurrentUser.fullName[0].toUpperCase(), style: TextStyle(color: Colors.white, fontSize: 20),),
           ),
           Container(width: double.infinity, alignment: Alignment.center, child: Text(_currentUser.getCurrentUser.fullName, style: TextStyle(fontWeight: FontWeight.bold),)),
-          Container(width: double.infinity, alignment: Alignment.center, child: Text("POSITION")),
+          Container(width: double.infinity, alignment: Alignment.center, child: Text(_currentUser.getCurrentUser.position)),
           Card(
             margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
             child: Padding(
