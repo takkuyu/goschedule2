@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Example holidays.
 final Map<DateTime, List> _holidays = {
@@ -10,7 +12,7 @@ final Map<DateTime, List> _holidays = {
   DateTime(2019, 4, 22): ['Easter Monday'],
 };
 
-class OurShifts extends StatefulWidget{
+class OurShifts extends StatefulWidget  {
   OurShifts({Key key, this.title}) : super(key: key);
   final String title;
 
@@ -27,62 +29,9 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    final _selectedDay = DateTime.now();
-    // @todo: Fetch data from firebase and add them on this variable.
-    _events = {
-      _selectedDay.subtract(Duration(days: 27)): [
-        {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 1', 'startTime': '8:00am', 'endTime': '5:00pm'}
-      ],
-      _selectedDay.subtract(Duration(days: 2)): [
-        {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 2', 'startTime': '8:00am', 'endTime': '5:00pm'}
-      ],
-      _selectedDay.subtract(Duration(days: 16)): [
-        {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 3', 'startTime': '8:00am', 'endTime': '5:00pm'}
-      ],
-      _selectedDay.subtract(Duration(days: 10)): [
-        {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 4', 'startTime': '8:00am', 'endTime': '5:00pm'}
-      ],
-      _selectedDay.subtract(Duration(days: 4)): [
-        {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 5', 'startTime': '8:00am', 'endTime': '5:00pm'}
-      ],
-      // Today
-      _selectedDay: [
-        {'title': 'Test Shift 6', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 6', 'startTime': '9:00am', 'endTime': '6:00pm'},
-        {'title': 'Test Shift 6', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 6', 'startTime': '9:00am', 'endTime': '6:00pm'}
-      ],
-      _selectedDay.add(Duration(days: 3)): [
-        {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 7', 'startTime': '8:00am', 'endTime': '5:00pm'}
-      ],
-      _selectedDay.add(Duration(days: 7)): [
-        {'title': 'Test Shift 8', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 8', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 8', 'startTime': '8:00am', 'endTime': '5:00pm'},
-        {'title': 'Test Shift 8', 'startTime': '8:00am', 'endTime': '5:00pm'}
-      ],
-      // _selectedDay.add(Duration(days: 3)): Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
-    };
+    _events = {};
 
-    _selectedEvents = _events[_selectedDay] ?? [];
+    _selectedEvents = [];
 
     _calendarController = CalendarController();
 
@@ -101,12 +50,13 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  // void _onDaySelected(DateTime day, List events) {
-  //   print('CALLBACK: _onDaySelected');
-  //   setState(() {
-  //     _selectedEvents = events;
-  //   });
-  // }
+  void _onDaySelected(DateTime day, List events, List holidays) {
+    // print('CALLBACK: _onDaySelected');
+    print(events);
+    setState(() {
+      _selectedEvents = events;
+    });
+  }
 
   void _onVisibleDaysChanged(DateTime first, DateTime last, CalendarFormat format) {
     print('CALLBACK: _onVisibleDaysChanged');
@@ -114,20 +64,43 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User user = auth.currentUser;
+    final uid = user.uid;
     return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          const SizedBox(height: 40.0),
-          Text('Shifts Schedule',
-            style: TextStyle(color: Colors.green[800],fontSize: 20,fontWeight: FontWeight.w800),
-          ),
-          const SizedBox(height: 10.0),
-          _buildTableCalendar(),
-          const SizedBox(height: 10.0),
-          Expanded(child: _buildEventList()),
-        ],
-      ),
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('shifts').where("employeeId", isEqualTo: uid).snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              // Init events when rendered before adding data.
+              _events = {};
+              // Add employee's shifts data to _events state.
+              snapshot.data.docs.forEach((result) {
+                DateTime date = result.data()['date'].toDate();
+                final formattedDate = DateTime(date.year, date.month, date.day);
+                final shift = {'title': "Test Shift Title", 'startTime': result.data()['startTime'], 'endTime': result.data()['endTime']};
+
+                if(_events[formattedDate] != null) {
+                  _events[formattedDate].add(shift);
+                } else {
+                  _events[formattedDate] = [shift];
+                }
+              });
+            }
+            return Scaffold(
+              body: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Container(
+                      child: _buildTableCalendar(),
+                    color: Colors.white,
+                    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20, top:20),
+                  ),
+                  Expanded(child: _buildEventList()),
+                ],
+              ),
+            );
+          }),
     );
   }
 
@@ -157,7 +130,7 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
           borderRadius: BorderRadius.circular(16.0),
         ),
       ),
-      //onDaySelected: _onDaySelected,
+      onDaySelected: _onDaySelected,
       onVisibleDaysChanged: _onVisibleDaysChanged,
     );
   }
@@ -167,8 +140,8 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
       children: _selectedEvents
           .map((event) => Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 0.8),
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(7.0),
+          color: Colors.white,
         ),
         margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
         child: ListTile(
@@ -178,7 +151,7 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
           ),
           subtitle: Text(
               'Starting: ' + event['startTime'] + '  Ending: ' + event['endTime'],
-              style: TextStyle(color: Colors.black, fontSize: 14)
+              style: TextStyle(color: Colors.black54, fontSize: 14)
           ),
           onTap: () => print('$event tapped!'),
         ),
@@ -187,14 +160,3 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-//
-// class OurShifts extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//         child: Text("Shifts", textScaleFactor: 2.0,)
-//     );
-//   }
-// }
