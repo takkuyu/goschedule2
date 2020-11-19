@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goschedule2/screens/root/root.dart';
+import 'package:goschedule2/screens/onBoarding/onBoarding.dart';
 import 'package:goschedule2/services/database.dart';
 import 'package:goschedule2/states/currentUser.dart';
 import 'package:goschedule2/widgets/ourContainer.dart';
@@ -17,7 +17,7 @@ class _OurJoinCompanyState extends State<OurJoinCompany> {
     String _returnString = await OurDatabase().joinCompany(companyId, _currentUser.getCurrentUser.uid);
 
     if(_returnString == "success!"){
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => OurRoot()), (route) => false);
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => OurOnBoardingScreen()), (route) => false);
     }
   }
 

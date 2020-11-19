@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:goschedule2/models/user_data.dart';
-
 import 'contact_details.dart';
 
 class ContactList extends StatefulWidget {
@@ -43,7 +42,7 @@ class _ContactListState extends State<ContactList> {
                     focusColor: Colors.white,
                     hintText: 'Search',
                     hintStyle: TextStyle(color: Colors.black),
-                    prefixIcon: Icon(Icons.search, color: Colors.white,),
+                    prefixIcon: Icon(Icons.search, color: Colors.black,),
                   ),
                 ),
               ),

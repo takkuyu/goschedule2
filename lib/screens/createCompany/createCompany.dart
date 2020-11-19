@@ -17,7 +17,6 @@ class _OurCreateGroupState extends State<OurCreateGroup> {
     String _returnString = await OurDatabase().createCompany(companyName, _currentUser.getCurrentUser.uid);
 
     if(_returnString == "success!"){
-      // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => OurRoot()), (route) => false);
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => OurOnBoardingScreen()), (route) => false);
     }
   }

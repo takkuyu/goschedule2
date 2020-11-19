@@ -149,6 +149,29 @@ class OurDatabase{
     return retVal;
   }
 
+  Future<String> leaveGroup(String companyId, String userUid) async {
+    String retVal = "error";
+    List<String> members = List();
+
+    try{
+      members.add(userUid);
+
+      await _firestore.collection("companies").doc(companyId).update({
+        'members' : FieldValue.arrayRemove(members),
+      });
+      await  _firestore.collection("users").doc(userUid).update({
+        'companyId' : null,
+      });
+    }
+
+    catch(e){
+      print(e);
+      print("_"+ companyId + "_");
+    }
+
+    return retVal;
+  }
+
   ///EDIT FROM HERE
   //Employee list from snapshot
   List<OurUser> _userListFromSnapshot(QuerySnapshot snapshot) {

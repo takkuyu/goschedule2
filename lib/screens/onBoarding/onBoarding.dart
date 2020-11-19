@@ -54,7 +54,7 @@ class _OurOnBoardingScreenState extends State<OurOnBoardingScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 40.0),
             child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[
-              Container(height: 500,
+              Container(height: 550,
               child: PageView(
                 physics: ClampingScrollPhysics(),
                 controller: _pageController,
@@ -65,83 +65,94 @@ class _OurOnBoardingScreenState extends State<OurOnBoardingScreen> {
                 },
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.all(40.0),
+                    padding: EdgeInsets.all(35.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Center(
                           child: Image(
                             image: AssetImage(
-                              'assets/Logo.PNG',
+                              'assets/Shifts.png',
                             ),
-                            height: 300.0,
-                            width: 300.0,
+                            height: 350.0,
+                            width: 350.0,
                           ),
                         ),
-                        SizedBox(height: 10.0,),
+                        SizedBox(height: 0.0,),
                         Center(
-                          child: Text("Text 1", style: TextStyle(
+                          child: Text("SEE UPCOMING SHIFTS!", style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 30.0,
+                            fontSize: 24.0,
                           )),
                         ),
                         SizedBox(height: 20.0,),
-                        Text("Enter Text Here..."),
+                        Text("Get to know when your next shift is about to start and keep track of your upcoming shifts.", style: TextStyle(
+                          color: Colors.white,
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        )),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(40.0),
+                    padding: EdgeInsets.all(35.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Center(
                           child: Image(
                             image: AssetImage(
-                              'assets/Logo.PNG',
+                              'assets/Contacts.png',
                             ),
-                            height: 300.0,
-                            width: 300.0,
+                            height: 350.0,
+                            width: 350.0,
                           ),
                         ),
-                        SizedBox(height: 10.0,),
                         Center(
-                          child: Text("Text 1", style: TextStyle(
+                          child: Text("CONTACT YOUR COWORKERS!", style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 30.0,
+                            fontSize: 24.0,
                           )),
                         ),
                         SizedBox(height: 20.0,),
-                        Text("Enter Text Here..."),
+                        Text("Get access to your coworkers contact information anytime.", style: TextStyle(
+                          color: Colors.white,
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        )),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(40.0),
+                    padding: EdgeInsets.all(35.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Center(
                           child: Image(
                             image: AssetImage(
-                              'assets/Logo.PNG',
+                              'assets/Calendar.png',
                             ),
-                            height: 300.0,
-                            width: 300.0,
+                            height: 350.0,
+                            width: 350.0,
                           ),
                         ),
-                        SizedBox(height: 10.0,),
+                        SizedBox(height: 0.0,),
                         Center(
-                          child: Text("Text 1", style: TextStyle(
+                          child: Text("KEEP TRACK OF YOUR TIME!", style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 30.0,
+                            fontSize: 24.0,
                           )),
                         ),
                         SizedBox(height: 20.0,),
-                        Text("Enter Text Here..."),
+                        Text("GoSchedule allows you to view and keep track of your time and gives you the tools to update your work availability on the go.", style: TextStyle(
+                          color: Colors.white,
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        )),
                       ],
                     ),
                   ),

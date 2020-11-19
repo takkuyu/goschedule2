@@ -12,11 +12,14 @@ class OurLogin extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.all(20.0),
               children: <Widget>[
-                Padding(padding: EdgeInsets.all(40.0),child: Text('GoSchedule', style: TextStyle(
-                fontSize: 53.0, fontWeight: FontWeight.bold, color: Colors.white
-                ),),
+                Padding(padding: EdgeInsets.all(20.0),child: Image(
+                  image: AssetImage(
+                    'assets/Logo.PNG',
+                  ),
+                  height: 230.0,
+                  width: 250.0,
                 ),
-                SizedBox(height: 20.0),
+                ),
                 OurLoginForm(),
               ],
             ),

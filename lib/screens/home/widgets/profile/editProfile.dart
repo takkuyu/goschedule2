@@ -5,8 +5,6 @@ import 'package:goschedule2/services/database.dart';
 import 'package:goschedule2/states/currentUser.dart';
 import 'package:provider/provider.dart';
 
-
-
 class EditProfile extends StatefulWidget{
   @override
   MapScreenState createState() => MapScreenState();

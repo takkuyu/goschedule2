@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:goschedule2/screens/home/widgets/contacts/contacts.dart';
 import 'package:goschedule2/screens/home/widgets/create_shift/create_shift.dart';
 import 'package:goschedule2/screens/home/widgets/dashboard.dart';
-import 'package:goschedule2/screens/home/widgets/profile.dart';
 import 'package:goschedule2/screens/home/widgets/profile/profile_details.dart';
 import 'package:goschedule2/screens/home/widgets/shifts_activity.dart';
+import 'package:goschedule2/states/currentGroup.dart';
 import 'package:goschedule2/states/currentUser.dart';
 import 'package:provider/provider.dart';
 
@@ -18,12 +18,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  @override
+  void initState() {
+    super.initState();
+    CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+    CurrentGroup _currentCompany = Provider.of<CurrentGroup>(context, listen: false);
+    _currentCompany.updateStateFromDatabase(_currentUser.getCurrentUser.companyId);
+  }
+
   int pageIndex = 0;
 
   final OurShifts _shifts = OurShifts();
-  // final OurDashboard _dashboard = OurDashboard();
+  final OurDashboard _dashboard = OurDashboard();
   final ProfileDetails _profileDetails = ProfileDetails();
-  final OurProfile _profile = OurProfile();
   final OurContacts _contacts = OurContacts();
   final CreateShift _createShift = CreateShift();
 
@@ -32,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _pageChooser(int page){
     switch (page) {
       case 0:
-        return _profile;
+        return _dashboard;
         break;
       case 1:
         return _shifts;

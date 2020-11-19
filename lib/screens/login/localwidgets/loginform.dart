@@ -86,7 +86,7 @@ class _OurLoginFormState extends State<OurLoginForm> {
     return OurContainer(
       child: Column(
         children: <Widget>[
-          Padding(padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 8.0),
+          Padding(padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 8.0),
           child: Text('Log in', style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 25.0, fontWeight: FontWeight.bold),
           ),
           ),

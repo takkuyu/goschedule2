@@ -3,6 +3,7 @@ import 'package:goschedule2/screens/home/home.dart';
 import 'package:goschedule2/screens/login/login.dart';
 import 'package:goschedule2/screens/noCompany/noCompany.dart';
 import 'package:goschedule2/screens/splashScreen/splashScreen.dart';
+import 'package:goschedule2/states/currentGroup.dart';
 import 'package:goschedule2/states/currentUser.dart';
 import 'package:provider/provider.dart';
 
@@ -61,7 +62,11 @@ class _OurRootState extends State<OurRoot> {
         retVal = OurNoCompany();
         break;
       case AuthStatus.inCompany:
-        retVal = HomeScreen();
+        retVal = ChangeNotifierProvider(
+          create: (context) => CurrentGroup(),
+          child: HomeScreen(),
+        );
+
         break;
       default:
     }
