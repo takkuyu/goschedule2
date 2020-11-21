@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:goschedule2/models/user_data.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../states/currentUser.dart';
 import 'contact_details.dart';
 
 class ContactList extends StatefulWidget {
@@ -20,6 +22,7 @@ class _ContactListState extends State<ContactList> {
 
   @override
   Widget build(BuildContext context) {
+    CurrentUser _currentUser = Provider.of(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Contacts'),
@@ -53,7 +56,7 @@ class _ContactListState extends State<ContactList> {
         ),
       ),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('users').snapshots(),
+          stream: FirebaseFirestore.instance.collection('users').where('companyId', isEqualTo: _currentUser.getCurrentUser.companyId).snapshots(),
           builder: (context, snapshot) {
             if(!snapshot.hasData) return Center(child: CircularProgressIndicator(),);
             return ListView.builder(
