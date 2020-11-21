@@ -96,7 +96,14 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
                     color: Colors.white,
                     padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20, top:20),
                   ),
-                  Expanded(child: _buildEventList()),
+                  _selectedEvents.length > 0 ?
+                    Expanded(child: _buildEventList())
+                      :
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                      child: Text('No shifts added to this date.',
+                          style: TextStyle(fontSize: 16))
+                  ),
                 ],
               ),
             );

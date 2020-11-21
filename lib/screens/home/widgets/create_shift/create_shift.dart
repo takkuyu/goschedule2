@@ -152,7 +152,7 @@ class _CreateShiftState extends State<CreateShift> {
                           DocumentReference doc = FirebaseFirestore.instance.collection('shifts').doc();
                           await doc.set({
                             'date': selectedDate,
-                            'employeeId': user.companyId,
+                            'employeeId': user.uid,
                             'employeeName': user.fullName, 
                             'startTime': startTime.format(context),
                             'endTime': endTime.format(context),
