@@ -154,7 +154,7 @@ class _CreateShiftState extends State<CreateShift> {
                             'date': selectedDate,
                             'employeeId': user.uid,
                             'employeeName': user.fullName,
-                            'title' : user.position,
+                            'title' : _currentUser.getCurrentUser.position,
                             'startTime': startTime.format(context),
                             'endTime': endTime.format(context),
                           });

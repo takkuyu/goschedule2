@@ -8,9 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
-
 import '../../home.dart';
-import 'profile_details.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -240,7 +238,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _phoneNo,
                 decoration: InputDecoration(
                   labelText: 'Phone Number',
-                  prefixIcon: Icon(Icons.phone_android_rounded),
+                  prefixIcon: Icon(Icons.phone_android),
                   //hintText: _currentUser.getCurrentUser.phoneNo,
                 ),
               ),
@@ -251,7 +249,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  prefixIcon: Icon(Icons.email_outlined),
+                  prefixIcon: Icon(Icons.email),
                   //hintText: _currentUser.getCurrentUser.email,
                 ),
               ),
@@ -262,7 +260,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _position,
                 decoration: InputDecoration(
                   labelText: 'Position',
-                  prefixIcon: Icon(Icons.work_outline),
+                  prefixIcon: Icon(Icons.work),
                   //hintText: _currentUser.getCurrentUser.position,
                 ),
               ),
@@ -273,7 +271,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _monAvailability,
                 decoration: InputDecoration(
                   labelText: 'Monday Availability',
-                  prefixIcon: Icon(Icons.calendar_today_outlined),
+                  prefixIcon: Icon(Icons.calendar_today),
                   //hintText: _currentUser.getCurrentUser.monAvailability,
                 ),
               ),
@@ -284,7 +282,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _tueAvailability,
                 decoration: InputDecoration(
                   labelText: 'Tuesday Availability',
-                  prefixIcon: Icon(Icons.calendar_today_outlined),
+                  prefixIcon: Icon(Icons.calendar_today),
                   //hintText: _currentUser.getCurrentUser.tueAvailability,
                 ),
               ),
@@ -295,7 +293,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _wedAvailability,
                 decoration: InputDecoration(
                   labelText: 'Wednesday Availability',
-                  prefixIcon: Icon(Icons.calendar_today_outlined),
+                  prefixIcon: Icon(Icons.calendar_today),
                   //hintText: _currentUser.getCurrentUser.wedAvailability,
                 ),
               ),
@@ -306,7 +304,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _thuAvailability,
                 decoration: InputDecoration(
                   labelText: 'Thursday Availability',
-                  prefixIcon: Icon(Icons.calendar_today_outlined),
+                  prefixIcon: Icon(Icons.calendar_today),
                   //hintText: _currentUser.getCurrentUser.thuAvailability,
                 ),
               ),
@@ -317,7 +315,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _friAvailability,
                 decoration: InputDecoration(
                   labelText: 'Friday Availability',
-                  prefixIcon: Icon(Icons.calendar_today_outlined),
+                  prefixIcon: Icon(Icons.calendar_today),
                   //hintText: _currentUser.getCurrentUser.friAvailability,
                 ),
               ),
@@ -328,7 +326,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _satAvailability,
                 decoration: InputDecoration(
                   labelText: 'Saturday Availability',
-                  prefixIcon: Icon(Icons.calendar_today_outlined),
+                  prefixIcon: Icon(Icons.calendar_today),
                   //hintText: _currentUser.getCurrentUser.satAvailability,
                 ),
               ),
@@ -339,7 +337,7 @@ class MapScreenState extends State<EditProfile>
                 controller: _sunAvailability,
                 decoration: InputDecoration(
                   labelText: 'Sunday Availability',
-                  prefixIcon: Icon(Icons.calendar_today_outlined),
+                  prefixIcon: Icon(Icons.calendar_today),
                   //hintText: _currentUser.getCurrentUser.sunAvailability,
                 ),
               ),
