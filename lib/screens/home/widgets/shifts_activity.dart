@@ -78,7 +78,9 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
               snapshot.data.docs.forEach((result) {
                 DateTime date = result.data()['date'].toDate();
                 final formattedDate = DateTime(date.year, date.month, date.day);
-                final shift = {'title': "Test Shift Title", 'startTime': result.data()['startTime'], 'endTime': result.data()['endTime']};
+                // Check if the data has title field.
+                final title = result.data().containsKey('title') ? result.data()['title'] : "No title added";
+                final shift = {'title': title, 'startTime': result.data()['startTime'], 'endTime': result.data()['endTime']};
 
                 if(_events[formattedDate] != null) {
                   _events[formattedDate].add(shift);
@@ -92,11 +94,18 @@ class _OurShiftsState extends State<OurShifts> with TickerProviderStateMixin {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Container(
-                      child: _buildTableCalendar(),
+                    child: _buildTableCalendar(),
                     color: Colors.white,
                     padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20, top:20),
                   ),
-                  Expanded(child: _buildEventList()),
+                  _selectedEvents.length > 0 ?
+                  Expanded(child: _buildEventList())
+                      :
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                      child: Text('No shifts added to this date.',
+                          style: TextStyle(fontSize: 16))
+                  ),
                 ],
               ),
             );
