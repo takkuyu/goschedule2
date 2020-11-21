@@ -4,10 +4,8 @@ import 'package:goschedule2/states/currentUser.dart';
 import 'package:provider/provider.dart';
 
 class ProfileDetails extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
     CurrentUser _currentUser = Provider.of(context, listen: false);
 
     return Scaffold(
@@ -19,7 +17,10 @@ class ProfileDetails extends StatelessWidget {
             MaterialPageRoute(builder: (context) => EditProfile()),
           );
         },
-        child: Icon(Icons.edit),
+        child: Icon(
+          Icons.edit,
+          color: Colors.white,
+        ),
         backgroundColor: Colors.blue,
       ),
       body: ListView(
@@ -33,10 +34,22 @@ class ProfileDetails extends StatelessWidget {
               color: Colors.blue,
               shape: BoxShape.circle,
             ),
-            child: Text(_currentUser.getCurrentUser.fullName[0].toUpperCase(), style: TextStyle(color: Colors.white, fontSize: 20),),
+            child: Text(
+              _currentUser.getCurrentUser.fullName[0].toUpperCase(),
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
           ),
-          Container(width: double.infinity, alignment: Alignment.center, child: Text(_currentUser.getCurrentUser.fullName, style: TextStyle(fontWeight: FontWeight.bold),)),
-          Container(width: double.infinity, alignment: Alignment.center, child: Text(_currentUser.getCurrentUser.position)),
+          Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: Text(
+                _currentUser.getCurrentUser.fullName,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
+          Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: Text(_currentUser.getCurrentUser.position)),
           Card(
             margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
             child: Padding(
@@ -45,8 +58,13 @@ class ProfileDetails extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.phone, size: 32,),
-                      SizedBox(width: 20,),
+                      Icon(
+                        Icons.phone,
+                        size: 32,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -59,8 +77,13 @@ class ProfileDetails extends StatelessWidget {
                   Divider(),
                   Row(
                     children: [
-                      Icon(Icons.email, size: 32,),
-                      SizedBox(width: 20,),
+                      Icon(
+                        Icons.email,
+                        size: 32,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -86,12 +109,23 @@ class ProfileDetails extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Monday', style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text('09:00 AM - 06:00 PM', style: TextStyle(fontSize: 10),),
+                          Text(
+                            'Monday',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '09:00 AM - 06:00 PM',
+                            style: TextStyle(fontSize: 10),
+                          ),
                         ],
                       ),
-                      SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.monAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        _currentUser.getCurrentUser.monAvailability,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   Divider(),
@@ -101,12 +135,23 @@ class ProfileDetails extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Tuesday', style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text('09:00 AM - 06:00 PM', style: TextStyle(fontSize: 10),),
+                          Text(
+                            'Tuesday',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '09:00 AM - 06:00 PM',
+                            style: TextStyle(fontSize: 10),
+                          ),
                         ],
                       ),
-                      SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.tueAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        _currentUser.getCurrentUser.tueAvailability,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   Divider(),
@@ -116,12 +161,23 @@ class ProfileDetails extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Wednsday', style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text('09:00 AM - 06:00 PM', style: TextStyle(fontSize: 10),),
+                          Text(
+                            'Wednsday',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '09:00 AM - 06:00 PM',
+                            style: TextStyle(fontSize: 10),
+                          ),
                         ],
                       ),
-                      SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.wedAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        _currentUser.getCurrentUser.wedAvailability,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   Divider(),
@@ -131,12 +187,23 @@ class ProfileDetails extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Thursday', style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text('09:00 AM - 06:00 PM', style: TextStyle(fontSize: 10),),
+                          Text(
+                            'Thursday',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '09:00 AM - 06:00 PM',
+                            style: TextStyle(fontSize: 10),
+                          ),
                         ],
                       ),
-                      SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.thuAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        _currentUser.getCurrentUser.thuAvailability,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   Divider(),
@@ -146,12 +213,23 @@ class ProfileDetails extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Friday', style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text('09:00 AM - 06:00 PM', style: TextStyle(fontSize: 10),),
+                          Text(
+                            'Friday',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '09:00 AM - 06:00 PM',
+                            style: TextStyle(fontSize: 10),
+                          ),
                         ],
                       ),
-                      SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.friAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        _currentUser.getCurrentUser.friAvailability,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   Divider(),
@@ -161,12 +239,23 @@ class ProfileDetails extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Saturday', style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text('09:00 AM - 06:00 PM', style: TextStyle(fontSize: 10),),
+                          Text(
+                            'Saturday',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '09:00 AM - 06:00 PM',
+                            style: TextStyle(fontSize: 10),
+                          ),
                         ],
                       ),
-                      SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.satAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        _currentUser.getCurrentUser.satAvailability,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   Divider(),
@@ -176,12 +265,23 @@ class ProfileDetails extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Sunday', style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text('09:00 AM - 06:00 PM', style: TextStyle(fontSize: 10),),
+                          Text(
+                            'Sunday',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '09:00 AM - 06:00 PM',
+                            style: TextStyle(fontSize: 10),
+                          ),
                         ],
                       ),
-                      SizedBox(height: 2,),
-                      Text(_currentUser.getCurrentUser.sunAvailability, style: TextStyle(fontWeight: FontWeight.bold),),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        _currentUser.getCurrentUser.sunAvailability,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ],
