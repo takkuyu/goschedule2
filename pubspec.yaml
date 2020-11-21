@@ -35,6 +35,10 @@ dependencies:
   google_sign_in:
   curved_navigation_bar: ^0.3.4
   table_calendar: ^2.2.3
+  firebase_storage: ^5.0.1
+  image_picker: ^0.6.7+14
+  path: ^1.7.0
+  firebase_database: ^4.3.0
 
 dev_dependencies:
   flutter_test:
